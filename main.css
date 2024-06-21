@@ -1,4 +1,21 @@
-.main{
+.bList{
+    list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 10px;
+}
+
+.bb{
+    display: flex;
+    position: relative;
+    padding: 25px;
+    background-color: bisque;
+}
+
+.addBlock{
+position: absolute;
+position: fixed;
+left: 55%;
+top: 50% ;
+background-color: cornflowerblue;
+padding: 25px;
 }

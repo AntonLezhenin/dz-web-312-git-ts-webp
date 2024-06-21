@@ -1,20 +1,27 @@
-const plusButton : HTMLElement | null = document.querySelector(".plus");
+const addBlock : HTMLElement | null = document.querySelector(".addBlock");
 
-let counter : HTMLElement | null = document.querySelector(".counter");
+const bList : HTMLElement | null = document.querySelector(".bList");
 
-const minusButton : HTMLElement | null = document.querySelector(".minus");
+function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
 
+addBlock.addEventListener("click", function(){
 
-let start : number = 0;
-
-plusButton.addEventListener("click", function(){
-    start++;
-    counter.innerText = `${start}`;
-    return start
+let block : HTMLElement | null = document.createElement("div");
+block.style.width = "100px";
+block.style.height = "100px";
+block.style.backgroundColor = getRandomColor();
+bList.appendChild(block);
+block.addEventListener("click", function(e : any){
+    let nothing = block.style.display = "none"
+    e = nothing;
+})
 });
 
-minusButton.addEventListener("click", function(){
-    start--;
-    counter.innerText = `${start}`;
-    return start
-})
