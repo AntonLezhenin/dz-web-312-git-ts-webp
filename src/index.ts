@@ -1,20 +1,49 @@
-const plusButton : HTMLElement | null = document.querySelector(".plus");
+const countryInput : HTMLElement | any = document.querySelector(".countryInput");
 
-let counter : HTMLElement | null = document.querySelector(".counter");
+const suggestionsContainer : HTMLElement | any = document.querySelector(".suggestions");
 
-const minusButton : HTMLElement | null = document.querySelector(".minus");
+const countries = [
+    "Россия",
+    "США",
+    "Китай",
+    "Индия",
+    "Бразилия",
+    "Германия",
+    "Япония",
+    "Франция",
+    "Великобритания",
+    "Италия"
+];
 
-
-let start : number = 0;
-
-plusButton.addEventListener("click", function(){
-    start++;
-    counter.innerText = `${start}`;
-    return start
+countryInput.addEventListener('input', function() {
+    const userInput = countryInput.value.toLowerCase();
+    const matchingCountries = countries.filter(country => country.toLowerCase().startsWith(userInput));
+    renderSuggestions(matchingCountries);
 });
 
-minusButton.addEventListener("click", function(){
-    start--;
-    counter.innerText = `${start}`;
-    return start
-})
+function renderSuggestions(suggestions: any) {
+    suggestionsContainer.innerHTML = '';
+    if (suggestions.length > 0) {
+        suggestions.forEach((el : string) => {
+            const div = document.createElement('div');
+            div.textContent = el;
+            div.classList.add('suggestion');
+            div.addEventListener('click', function() {
+                countryInput.value = el
+                suggestionsContainer.innerHTML = '';
+            });
+            suggestionsContainer.appendChild(div);
+        });
+        suggestionsContainer.style.display = 'block';
+    } else {
+        suggestionsContainer.style.display = 'none';
+    }
+}
+
+document.addEventListener('click', function(e) {
+    if (!suggestionsContainer.contains(e.target) && e.target !== countryInput) {
+        suggestionsContainer.style.display = 'none';
+    }
+});
+
+
